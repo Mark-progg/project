@@ -24,14 +24,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostsController::class, 'create'])->name('post.create');
+Route::group(['namespace' => 'App\Http\Controllers\Post'], function (){
+    Route::get('/posts', 'IndexController')->name('posts.index');
+    Route::get('/posts/create', 'CreateController')->name('post.create');
 
-Route::post('/posts', [PostsController::class, 'store'])->name('post.store');
-Route::get('/posts/{post}', [PostsController::class, 'show'])->name('post.show');
-Route::get('/posts/{post}/edit', [PostsController::class, 'edit'])->name('post.edit');
-Route::patch('/posts/{post}', [PostsController::class, 'update'])->name('post.update');
-Route::delete('/posts/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
+    Route::post('/posts', 'StoreController')->name('post.store');
+    Route::get('/posts/{post}', 'ShowController')->name('post.show');
+    Route::get('/posts/{post}/edit', 'EditController')->name('post.edit');
+    Route::patch('/posts/{post}', 'UpdateController')->name('post.update');
+    Route::delete('/posts/{post}', 'DestroyController')->name('post.destroy');
+});
+
+//Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
+//Route::get('/posts/create', [PostsController::class, 'create'])->name('post.create');
+//
+//Route::post('/posts', [PostsController::class, 'store'])->name('post.store');
+//Route::get('/posts/{post}', [PostsController::class, 'show'])->name('post.show');
+//Route::get('/posts/{post}/edit', [PostsController::class, 'edit'])->name('post.edit');
+//Route::patch('/posts/{post}', [PostsController::class, 'update'])->name('post.update');
+//Route::delete('/posts/{post}', [PostsController::class, 'destroy'])->name('post.destroy');
 
 Route::get('/posts/update', [PostsController::class, 'update']);
 Route::get('/posts/delete', [PostsController::class, 'delete']);

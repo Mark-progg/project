@@ -84,9 +84,6 @@ class PostsController extends Controller
         dd('restore');
     }
 
-    //firstOrCreate
-    //updateOrCreate
-
     public function firstOrCreate() {
         $anotherPost =[
             'title' => 'title of post from phpstorm',
